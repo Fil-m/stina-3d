@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stina 3D — Budgétaire 3D-Druck-Farm in Karlsruhe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',-apple-system,system-ui,sans-serif;color:#1a1a2e;background:#faf9f6;line-height:1.6;-webkit-font-smoothing:antialiased}
+
+:root{
+  --bg:#faf9f6;
+  --text:#1a1a2e;
+  --muted:#6b7280;
+  --accent:#e85d3a;
+  --accent-light:#fdf0ed;
+  --warm:#f59e0b;
+  --dark:#16213e;
+  --card:#ffffff;
+  --border:#e5e7eb;
+}
+
+.container{max-width:720px;margin:0 auto;padding:0 24px}
+
+.hero{
+  min-height:100vh;display:flex;flex-direction:column;justify-content:center;
+  background:linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%);
+  color:#fff;padding:40px 0;position:relative;overflow:hidden
+}
+.hero .container{flex:1;display:flex;flex-direction:column;justify-content:center;position:relative;z-index:2}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 20% 50%,rgba(245,158,11,0.08) 0%,transparent 50%),
+             radial-gradient(ellipse at 80% 50%,rgba(232,93,58,0.06) 0%,transparent 50%);
+  z-index:1
+}
+.lang-switch{
+  position:fixed;top:20px;right:24px;z-index:100;
+  display:flex;gap:4px;background:rgba(255,255,255,0.1);
+  backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.15);
+  border-radius:100px;padding:4px;font-size:13px
+}
+.lang-switch a{
+  padding:4px 12px;border-radius:100px;color:rgba(255,255,255,0.5);
+  text-decoration:none;font-weight:500;transition:all 0.2s
+}
+.lang-switch a.active{background:rgba(255,255,255,0.2);color:#fff}
+.lang-switch a:hover{color:#fff}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(255,255,255,0.1);backdrop-filter:blur(8px);
+  border:1px solid rgba(255,255,255,0.15);
+  padding:6px 16px;border-radius:100px;font-size:13px;font-weight:500;
+  letter-spacing:0.3px;margin-bottom:32px;width:fit-content
+}
+.hero h1{
+  font-size:clamp(2.6rem,8vw,4.2rem);font-weight:900;line-height:1.05;
+  letter-spacing:-0.03em;margin-bottom:12px
+}
+.hero h1 span{background:linear-gradient(135deg,#f59e0b,#e85d3a);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero .subtitle{
+  font-size:clamp(1.05rem,2.5vw,1.2rem);color:rgba(255,255,255,0.65);
+  max-width:540px;margin-bottom:8px;line-height:1.6
+}
+.hero .tagline{
+  font-size:0.92rem;color:rgba(255,255,255,0.5);
+  max-width:540px;margin-bottom:36px;line-height:1.6
+}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:14px 28px;border-radius:12px;font-size:15px;font-weight:600;
+  text-decoration:none;transition:all 0.2s;border:none;cursor:pointer
+}
+.btn-primary{background:linear-gradient(135deg,#f59e0b,#e85d3a);color:#fff}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(232,93,58,0.35)}
+.btn-outline{background:transparent;border:1.5px solid rgba(255,255,255,0.3);color:#fff}
+.btn-outline:hover{background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.5)}
+
+section{padding:80px 0}
+.section-label{
+  font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;
+  color:var(--accent);margin-bottom:8px
+}
+section h2{
+  font-size:clamp(1.6rem,4vw,2.2rem);font-weight:800;letter-spacing:-0.02em;
+  margin-bottom:16px;line-height:1.2
+}
+section h2+.sub{color:var(--muted);font-size:1.05rem;margin-bottom:48px;max-width:520px}
+
+.story{background:var(--bg)}
+.story-grid{display:flex;flex-direction:column;gap:24px}
+.story-card{
+  background:var(--card);border:1px solid var(--border);border-radius:16px;
+  padding:28px;transition:box-shadow 0.2s
+}
+.story-card:hover{box-shadow:0 4px 20px rgba(0,0,0,0.06)}
+.story-card .icon{font-size:28px;margin-bottom:12px}
+.story-card h3{font-size:1.05rem;font-weight:700;margin-bottom:6px}
+.story-card p{color:var(--muted);font-size:0.92rem;line-height:1.6}
+
+.numbers{
+  background:var(--dark);color:#fff;text-align:center
+}
+.numbers .section-label{color:var(--warm)}
+.numbers-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:32px;
+  margin-top:40px
+}
+.num-item .num{
+  font-size:clamp(2rem,5vw,3rem);font-weight:900;
+  background:linear-gradient(135deg,#f59e0b,#e85d3a);-webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;background-clip:text;line-height:1
+}
+.num-item .label{font-size:0.85rem;color:rgba(255,255,255,0.6);margin-top:4px}
+
+.principles{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+.principle-card{
+  background:var(--card);border:1px solid var(--border);border-radius:14px;
+  padding:24px;text-align:center;transition:box-shadow 0.2s
+}
+.principle-card:hover{box-shadow:0 4px 20px rgba(0,0,0,0.06)}
+.principle-card .icon{font-size:32px;margin-bottom:10px}
+.principle-card h4{font-size:0.95rem;font-weight:700;margin-bottom:4px}
+.principle-card p{font-size:0.85rem;color:var(--muted);line-height:1.55}
+
+.gallery{background:var(--bg)}
+.gallery-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:32px
+}
+.gallery-item{
+  aspect-ratio:4/3;border-radius:12px;overflow:hidden;
+  background:var(--border);position:relative;transition:transform 0.25s
+}
+.gallery-item:hover{transform:scale(1.02)}
+.gallery-item img{width:100%;height:100%;object-fit:cover;display:block}
+
+.join{
+  background:linear-gradient(135deg,#1a1a2e,#16213e);
+  color:#fff;text-align:center
+}
+.join .section-label{color:var(--warm)}
+.join p.sub{color:rgba(255,255,255,0.65);margin-left:auto;margin-right:auto}
+.join-ways{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin:40px 0}
+.join-item{
+  background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);
+  border-radius:14px;padding:24px;text-align:center;transition:all 0.2s
+}
+.join-item:hover{background:rgba(255,255,255,0.1);transform:translateY(-2px)}
+.join-item .icon{font-size:32px;margin-bottom:10px}
+.join-item h4{font-size:0.95rem;font-weight:700;margin-bottom:4px}
+.join-item p{font-size:0.85rem;color:rgba(255,255,255,0.55);line-height:1.55}
+.join .btn{margin-top:8px}
+
+footer{
+  background:#111827;color:rgba(255,255,255,0.5);text-align:center;
+  padding:32px 0;font-size:0.82rem;line-height:1.8
+}
+footer a{color:var(--warm);text-decoration:none}
+footer a:hover{text-decoration:underline}
+
+@media(max-width:480px){
+  section{padding:56px 0}
+  .hero h1{font-size:2.2rem}
+  .hero-actions .btn{width:100%;justify-content:center}
+  .numbers-grid{grid-template-columns:repeat(2,1fr);gap:20px}
+  .lang-switch{top:12px;right:12px;font-size:12px}
+}
+</style>
+</head>
+<body>
+
+<div class="lang-switch">
+  <a href="index.html">🇺🇦 UK</a>
+  <a href="index.html?lang=de" class="active">🇩🇪 DE</a>
+</div>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-badge">🇺🇦 Freiwilligenprojekt in Karlsruhe</div>
+    <h1><span>3D</span> Druck-Wand</h1>
+    <p class="subtitle">Budget-3D-Druck-Farm. Wir decken medizinische 3D-Druck-Bedürfnisse so günstig wie möglich ab.</p>
+    <p class="tagline">Wir suchen Filament-Reste, Freiwillige für Optimierung und Ressourcentausch. Ziviler Druck gegen Plastik. Mach mit ✌️</p>
+    <div class="hero-actions">
+      <a href="#join" class="btn btn-primary">🤝 Mitmachen</a>
+      <a href="https://t.me/stina3ddruku" class="btn btn-outline" target="_blank">📱 Telegram</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STORY ============ -->
+<section class="story" id="about">
+  <div class="container">
+    <div class="section-label">Über uns</div>
+    <h2>Wie alles begann</h2>
+    <p class="sub">Im Herbst 2024 schlugen wir dem Verein «Ukrainer in Karlsruhe» vor, eine 3D-Drucker-Wand aufzubauen. Damals gab es einen Drucker. Jetzt sind es acht – und wir sind Teil von <strong>Drukarmia</strong>.</p>
+    <div class="story-grid">
+      <div class="story-card">
+        <div class="icon">🖨️</div>
+        <h3>Von eins zu acht</h3>
+        <p>Gestartet mit einem Drucker, zwei dazu gekauft. Nach einer Festival-Party hatten wir eine echte Wand – jetzt 8 Drucker, dank der Community.</p>
+      </div>
+      <div class="story-card">
+        <div class="icon">🩺</div>
+        <h3>Medizinische Komponenten</h3>
+        <p>Wir drucken Teile für Prothesen, chirurgische Instrumente und andere medizinische Komponenten im Rahmen des Drukarmia-Netzwerks.</p>
+      </div>
+      <div class="story-card">
+        <div class="icon">⚡</div>
+        <h3>Günstig, aber qualitativ</h3>
+        <p>Unsere 8 Drucker kosten zusammen so viel wie 2,5 Bambu Lab. Ein Drucker von uns ist 3–4× günstiger, druckt aber nicht schlechter.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ NUMBERS ============ -->
+<section class="numbers">
+  <div class="container">
+    <div class="section-label">Die Wand</div>
+    <h2>Jetzt haben wir 8 Drucker</h2>
+    <div class="numbers-grid">
+      <div class="num-item">
+        <div class="num">8</div>
+        <div class="label">Drucker an der Wand</div>
+      </div>
+      <div class="num-item">
+        <div class="num">100%</div>
+        <div class="label">Freiwillige</div>
+      </div>
+      <div class="num-item">
+        <div class="num">39</div>
+        <div class="label">Mitglieder im Chat</div>
+      </div>
+      <div class="num-item">
+        <div class="num">♾️</div>
+        <div class="label">Enthusiasmus</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PHILOSOPHY ============ -->
+<section class="story" id="philosophy">
+  <div class="container">
+    <div class="section-label">Wie wir arbeiten</div>
+    <h2>Unser Ansatz</h2>
+    <p class="sub">Wir haben keine Chefs und keine Deadlines. Jeder macht, was er will, wann er kann. Und das funktioniert.</p>
+    <div class="principles">
+      <div class="principle-card">
+        <div class="icon">🫂</div>
+        <h4>Freundschaft</h4>
+        <p>Wir unterstützen uns gegenseitig. Kein Wettbewerb – nur Zusammenhalt.</p>
+      </div>
+      <div class="principle-card">
+        <div class="icon">🌀</div>
+        <h4>Flexibilität</h4>
+        <p>Drucke, wenn du Zeit hast. Mach Pause, wenn nicht. Das Leben geht vor.</p>
+      </div>
+      <div class="principle-card">
+        <div class="icon">🛠️</div>
+        <h4>DIY-Geist</h4>
+        <p>Wir bauen mit dem, was wir haben. Jeder Drucker an der Wand ist ein kleiner Sieg.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GALLERY ============ -->
+<section class="gallery" id="gallery">
+  <div class="container">
+    <div class="section-label">Fotos</div>
+    <h2>Unsere Werkstatt</h2>
+    <p class="sub">Die 3D-Drucker-Wand, die wir gemeinsam aufgebaut haben.</p>
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <img src="assets/photo-1.jpg" alt="3D Drucker Wand" loading="lazy">
+      </div>
+      <div class="gallery-item">
+        <img src="assets/photo-2.jpg" alt="Drucker in Betrieb" loading="lazy">
+      </div>
+      <div class="gallery-item">
+        <img src="assets/photo-3.jpg" alt="Druckprozess" loading="lazy">
+      </div>
+      <div class="gallery-item">
+        <img src="assets/photo-4.jpg" alt="Drucker-Wand" loading="lazy">
+      </div>
+      <div class="gallery-item">
+        <img src="assets/photo-5.jpg" alt="Gedruckte Teile" loading="lazy">
+      </div>
+      <div class="gallery-item">
+        <img src="assets/photo-6.jpg" alt="Medizinkomponenten" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ JOIN ============ -->
+<section class="join" id="join">
+  <div class="container">
+    <div class="section-label">Mach mit</div>
+    <h2>Werde Teil der Wand</h2>
+    <p class="sub">Wir brauchen Freiwillige – zum Drucken, für die Raumsuche, für die Öffentlichkeitsarbeit. Du entscheidest, wie du hilfst.</p>
+    <div class="join-ways">
+      <div class="join-item">
+        <div class="icon">🖨️</div>
+        <h4>Drucken</h4>
+        <p>Hast du einen Drucker oder willst in der Werkstatt drucken? Nimm STL und leg los.</p>
+      </div>
+      <div class="join-item">
+        <div class="icon">🔌</div>
+        <h4>Steckdose + Platz</h4>
+        <p>Kennst du einen Ort für eine weitere Wand? Wir suchen Raum mit Strom.</p>
+      </div>
+      <div class="join-item">
+        <div class="icon">📢</div>
+        <h4>Weitersagen</h4>
+        <p>Erzähl von uns bei Freunden, in Chats, auf der Arbeit. Jeder neue Freiwillige rettet mehr Leben.</p>
+      </div>
+      <div class="join-item">
+        <div class="icon">💪</div>
+        <h4>Öffentlichkeitsarbeit</h4>
+        <p>Hilf bei Events, Kommunikation, Ressourcensuche. Deine Talente sind gefragt.</p>
+      </div>
+      <div class="join-item">
+        <div class="icon">🧵</div>
+        <h4>Filament / Ressourcen</h4>
+        <p>Hast du Reste Plastik, Netzteile, Raspberry Pi? Wir nehmen alles, was funktioniert.</p>
+      </div>
+    </div>
+    <a href="https://t.me/stina3ddruku" class="btn btn-primary" target="_blank">📱 Telegram schreiben</a>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="container">
+    <p>Stina 3D Druck-Wand · Karlsruhe · Teil von <a href="https://drukarmia.org/" target="_blank">Drukarmia</a></p>
+    <p>Projekt gemeinsam mit dem Verein «Ukrainer in Karlsruhe»</p>
+    <p style="margin-top:8px">Gemacht mit ❤️ von Freiwilligen</p>
+  </div>
+</footer>
+
+</body>
+</html>

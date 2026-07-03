@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Стіна 3D — бюджетна волонтерська ферма 3D-друку в Карлсруе</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',-apple-system,system-ui,sans-serif;color:#1a1a2e;background:#faf9f6;line-height:1.6;-webkit-font-smoothing:antialiased}
+
+:root{
+  --bg:#faf9f6;
+  --text:#1a1a2e;
+  --muted:#6b7280;
+  --accent:#e85d3a;
+  --accent-light:#fdf0ed;
+  --warm:#f59e0b;
+  --dark:#16213e;
+  --card:#ffffff;
+  --border:#e5e7eb;
+}
+
+.container{max-width:720px;margin:0 auto;padding:0 24px}
+
+/* ===== HERO ===== */
+.hero{
+  min-height:100vh;display:flex;flex-direction:column;justify-content:center;
+  background:linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%);
+  color:#fff;padding:40px 0;position:relative;overflow:hidden
+}
+.hero .container{flex:1;display:flex;flex-direction:column;justify-content:center;position:relative;z-index:2}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 20% 50%,rgba(245,158,11,0.08) 0%,transparent 50%),
+             radial-gradient(ellipse at 80% 50%,rgba(232,93,58,0.06) 0%,transparent 50%);
+  z-index:1
+}
+.lang-switch{
+  position:fixed;top:20px;right:24px;z-index:100;
+  display:flex;gap:4px;background:rgba(255,255,255,0.1);
+  backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.15);
+  border-radius:100px;padding:4px;font-size:13px
+}
+.lang-switch a{
+  padding:4px 12px;border-radius:100px;color:rgba(255,255,255,0.5);
+  text-decoration:none;font-weight:500;transition:all 0.2s
+}
+.lang-switch a.active{background:rgba(255,255,255,0.2);color:#fff}
+.lang-switch a:hover{color:#fff}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(255,255,255,0.1);backdrop-filter:blur(8px);
+  border:1px solid rgba(255,255,255,0.15);
+  padding:6px 16px;border-radius:100px;font-size:13px;font-weight:500;
+  letter-spacing:0.3px;margin-bottom:32px;width:fit-content
+}
+.hero h1{
+  font-size:clamp(2.6rem,8vw,4.2rem);font-weight:900;line-height:1.05;
+  letter-spacing:-0.03em;margin-bottom:12px
+}
+.hero h1 span{background:linear-gradient(135deg,#f59e0b,#e85d3a);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero .subtitle{
+  font-size:clamp(1.05rem,2.5vw,1.2rem);color:rgba(255,255,255,0.65);
+  max-width:540px;margin-bottom:8px;line-height:1.6
+}
+.hero .tagline{
+  font-size:0.92rem;color:rgba(255,255,255,0.5);
+  max-width:540px;margin-bottom:36px;line-height:1.6
+}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:14px 28px;border-radius:12px;font-size:15px;font-weight:600;
+  text-decoration:none;transition:all 0.2s;border:none;cursor:pointer
+}
+.btn-primary{background:linear-gradient(135deg,#f59e0b,#e85d3a);color:#fff}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(232,93,58,0.35)}
+.btn-outline{background:transparent;border:1.5px solid rgba(255,255,255,0.3);color:#fff}
+.btn-outline:hover{background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.5)}
+
+/* ===== SECTIONS ===== */
+section{padding:80px 0}
+.section-label{
+  font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;
+  color:var(--accent);margin-bottom:8px
+}
+section h2{
+  font-size:clamp(1.6rem,4vw,2.2rem);font-weight:800;letter-spacing:-0.02em;
+  margin-bottom:16px;line-height:1.2
+}
+section h2+.sub{color:var(--muted);font-size:1.05rem;margin-bottom:48px;max-width:520px}
+
+/* ===== STORY ===== */
+.story{background:var(--bg)}
+.story-grid{display:flex;flex-direction:column;gap:24px}
+.story-card{
+  background:var(--card);border:1px solid var(--border);border-radius:16px;
+  padding:28px;transition:box-shadow 0.2s
+}
+.story-card:hover{box-shadow:0 4px 20px rgba(0,0,0,0.06)}
+.story-card .icon{font-size:28px;margin-bottom:12px}
+.story-card h3{font-size:1.05rem;font-weight:700;margin-bottom:6px}
+.story-card p{color:var(--muted);font-size:0.92rem;line-height:1.6}
+
+/* ===== NUMBERS ===== */
+.numbers{
+  background:var(--dark);color:#fff;text-align:center
+}
+.numbers .section-label{color:var(--warm)}
+.numbers-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:32px;
+  margin-top:40px
+}
+.num-item{}
+.num-item .num{
+  font-size:clamp(2rem,5vw,3rem);font-weight:900;
+  background:linear-gradient(135deg,#f59e0b,#e85d3a);-webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;background-clip:text;line-height:1
+}
+.num-item .label{font-size:0.85rem;color:rgba(255,255,255,0.6);margin-top:4px}
+
+/* ===== PRINCIPLES ===== */
+.principles{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+.principle-card{
+  background:var(--card);border:1px solid var(--border);border-radius:14px;
+  padding:24px;text-align:center;transition:box-shadow 0.2s
+}
+.principle-card:hover{box-shadow:0 4px 20px rgba(0,0,0,0.06)}
+.principle-card .icon{font-size:32px;margin-bottom:10px}
+.principle-card h4{font-size:0.95rem;font-weight:700;margin-bottom:4px}
+.principle-card p{font-size:0.85rem;color:var(--muted);line-height:1.55}
+
+/* ===== JOIN ===== */
+.join{
+  background:linear-gradient(135deg,#1a1a2e,#16213e);
+  color:#fff;text-align:center
+}
+.join .section-label{color:var(--warm)}
+.join p.sub{color:rgba(255,255,255,0.65);margin-left:auto;margin-right:auto}
+.join-ways{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin:40px 0}
+.join-item{
+  background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);
+  border-radius:14px;padding:24px;text-align:center;transition:all 0.2s
+}
+.join-item:hover{background:rgba(255,255,255,0.1);transform:translateY(-2px)}
+.join-item .icon{font-size:32px;margin-bottom:10px}
+.join-item h4{font-size:0.95rem;font-weight:700;margin-bottom:4px}
+.join-item p{font-size:0.85rem;color:rgba(255,255,255,0.55);line-height:1.55}
+.join .btn{margin-top:8px}
+
+/* ===== GALLERY PLACEHOLDER ===== */
+.gallery{background:var(--bg)}
+.gallery-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:32px
+}
+.gallery-item{
+  aspect-ratio:4/3;border-radius:12px;overflow:hidden;
+  background:var(--border);position:relative;transition:transform 0.25s
+}
+.gallery-item:hover{transform:scale(1.02)}
+.gallery-item img{width:100%;height:100%;object-fit:cover;display:block}
+
+/* ===== FOOTER ===== */
+footer{
+  background:#111827;color:rgba(255,255,255,0.5);text-align:center;
+  padding:32px 0;font-size:0.82rem;line-height:1.8
+}
+footer a{color:var(--warm);text-decoration:none}
+footer a:hover{text-decoration:underline}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:480px){
+  section{padding:56px 0}
+  .hero h1{font-size:2.2rem}
+  .hero-actions .btn{width:100%;justify-content:center}
+  .numbers-grid{grid-template-columns:repeat(2,1fr);gap:20px}
+  .lang-switch{top:12px;right:12px;font-size:12px}
+}
+</style>
+</head>
+<body>
+
+<div class="lang-switch">
+  <a href="index.html" class="active">🇺🇦 UK</a>
+  <a href="de.html">🇩🇪 DE</a>
+</div>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-badge">🇺🇦 Волонтерський проект у Карлсруе</div>
+    <h1>Стіна <span>3D</span> друкарня</h1>
+    <p class="subtitle">Бюджетна 3D-ферма. Максимально дешево закриваємо медичні потреби в 3D-друці.</p>
+    <p class="tagline">Шукаємо залишки filament, волонтерів на оптимізацію та обмін ресурсами. Цивільний друк за пластик. Долучайся ✌️</p>
+    <div class="hero-actions">
+      <a href="#join" class="btn btn-primary">🤝 Долучитись</a>
+      <a href="https://t.me/stina3ddruku" class="btn btn-outline" target="_blank">📱 Telegram</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STORY ============ -->
+<section class="story" id="about">
+  <div class="container">
+    <div class="section-label">Про нас</div>
+    <h2>Як усе почалося</h2>
+    <p class="sub">Восени 2024 ми запропонували ферайну «Українці в Карлсруе» зібрати стіну 3D-принтерів. Тоді був один принтер. Тепер їх вісім — і ми частина <strong>Друкармії</strong>.</p>
+    <div class="story-grid">
+      <div class="story-card">
+        <div class="icon">🖨️</div>
+        <h3>Від одного — до восьми</h3>
+        <p>Починали з одного принтера, докупили ще два. А після фестивальної вечірки зібрали справжню стіну — тепер у нас 8 принтерів завдяки підтримці спільноти.</p>
+      </div>
+      <div class="story-card">
+        <div class="icon">🩺</div>
+        <h3>Медичні компоненти</h3>
+        <p>Друкуємо деталі для протезів, хірургічні інструменти та інші медичні компоненти в межах мережі Друкармія.</p>
+      </div>
+      <div class="story-card">
+        <div class="icon">⚡</div>
+        <h3>Бюджетно, але якісно</h3>
+        <p>8 наших принтерів коштують стільки ж, скільки 2,5 Bambu Lab. Один наш принтер — у 3–4 рази дешевший, але друкує не гірше.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ NUMBERS ============ -->
+<section class="numbers">
+  <div class="container">
+    <div class="section-label">Стіна</div>
+    <h2>Тепер у нас 8 принтерів</h2>
+    <div class="numbers-grid">
+      <div class="num-item">
+        <div class="num">8</div>
+        <div class="label">принтерів на стіні</div>
+      </div>
+      <div class="num-item">
+        <div class="num">100%</div>
+        <div class="label">волонтери</div>
+      </div>
+      <div class="num-item">
+        <div class="num">39</div>
+        <div class="label">учасників у чаті</div>
+      </div>
+      <div class="num-item">
+        <div class="num">♾️</div>
+        <div class="label">ентузіазму</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PHILOSOPHY ============ -->
+<section class="story" id="philosophy">
+  <div class="container">
+    <div class="section-label">Як ми працюємо</div>
+    <h2>Наш підхід</h2>
+    <p class="sub">У нас немає начальників і дедлайнів. Кожен робить те, що хоче, коли може. І це працює.</p>
+    <div class="principles">
+      <div class="principle-card">
+        <div class="icon">🫂</div>
+        <h4>Дружність</h4>
+        <p>Ми підтримуємо одне одного. Немає конкуренції — є взаємодопомога.</p>
+      </div>
+      <div class="principle-card">
+        <div class="icon">🌀</div>
+        <h4>Гнучкість</h4>
+        <p>Друкуєш, коли є час. Пропускаєш, коли нема. Життя — на першому місці.</p>
+      </div>
+      <div class="principle-card">
+        <div class="icon">🛠️</div>
+        <h4>DIY-дух</h4>
+        <p>Ми будуємо з того, що маємо. Кожен принтер на стіні — маленька перемога.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GALLERY ============ -->
+<section class="gallery" id="gallery">
+  <div class="container">
+    <div class="section-label">Фото</div>
+    <h2>Наша друкарня</h2>
+    <p class="sub">Стіна 3D-принтерів, яку ми зібрали разом.</p>
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <img src="assets/photo-1.jpg" alt="Стіна 3D принтерів" loading="lazy">
+      </div>
+      <div class="gallery-item">
+        <img src="assets/photo-2.jpg" alt="Принтери в роботі" loading="lazy">
+      </div>
+      <div class="gallery-item">
+        <img src="assets/photo-3.jpg" alt="Процес друку" loading="lazy">
+      </div>
+      <div class="gallery-item">
+        <img src="assets/photo-4.jpg" alt="Стіна принтерів" loading="lazy">
+      </div>
+      <div class="gallery-item">
+        <img src="assets/photo-5.jpg" alt="Деталі, які друкуємо" loading="lazy">
+      </div>
+      <div class="gallery-item">
+        <img src="assets/photo-6.jpg" alt="Друк медичних компонентів" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ JOIN ============ -->
+<section class="join" id="join">
+  <div class="container">
+    <div class="section-label">Долучайся</div>
+    <h2>Стань частиною стіни</h2>
+    <p class="sub">Нам потрібні волонтери — для друку, для пошуку простору, для спілкування. Ти обираєш, чим допомогти.</p>
+    <div class="join-ways">
+      <div class="join-item">
+        <div class="icon">🖨️</div>
+        <h4>Друк</h4>
+        <p>Маєш принтер або готовий друкувати в майстерні? Бери STL і друкуй.</p>
+      </div>
+      <div class="join-item">
+        <div class="icon">🔌</div>
+        <h4>Розетка + місце</h4>
+        <p>Знаєш, де можна поставити ще одну стіну? Шукаємо простір із електрикою.</p>
+      </div>
+      <div class="join-item">
+        <div class="icon">📢</div>
+        <h4>Інформація</h4>
+        <p>Розкажи про нас друзям, у чатах, на роботі. Кожен новий волонтер — це більше врятованих життів.</p>
+      </div>
+      <div class="join-item">
+        <div class="icon">💪</div>
+        <h4>Суспільна діяльність</h4>
+        <p>Допомагай із заходами, комунікацією, пошуком ресурсів. Твої таланти знадобляться.</p>
+      </div>
+      <div class="join-item">
+        <div class="icon">🧵</div>
+        <h4>Filament / ресурси</h4>
+        <p>Маєш залишки пластику, блоки живлення, Raspberry Pi? Приймаємо все, що працює.</p>
+      </div>
+    </div>
+    <a href="https://t.me/stina3ddruku" class="btn btn-primary" target="_blank">📱 Написати в Telegram</a>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="container">
+    <p>Стіна 3D друкарня · Карлсруе · Частина <a href="https://drukarmia.org/" target="_blank">Друкармії</a></p>
+    <p>Проект спільно з «Українці в Карлсруе»</p>
+    <p style="margin-top:8px">Зроблено з ❤️ волонтерами</p>
+  </div>
+</footer>
+
+</body>
+</html>
