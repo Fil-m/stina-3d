@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Стіна 3D — Афіша А4</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        /* CSS reset & variables optimized for B&W print */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+            color: #000000;
+            background: #ffffff;
+            line-height: 1.4;
+            padding: 0;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+        
+        /* A4 Page size settings */
+        @page {
+            size: A4;
+            margin: 15mm;
+        }
+        
+        .poster-container {
+            width: 100%;
+            max-width: 210mm; /* A4 width */
+            min-height: 297mm; /* A4 height */
+            margin: 0 auto;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* Top Header styling */
+        .header {
+            text-align: center;
+            border-bottom: 3px solid #000;
+            padding-bottom: 8px;
+            margin-bottom: 24px;
+        }
+        .header-badge {
+            display: inline-block;
+            border: 2px solid #000;
+            padding: 4px 12px;
+            font-weight: 700;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+        .header h1 {
+            font-size: 42px;
+            font-weight: 900;
+            letter-spacing: -1px;
+            text-transform: uppercase;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+        .header h1 span {
+            background: #000;
+            color: #fff;
+            padding: 0 8px;
+            display: inline-block;
+        }
+        .header .tagline {
+            font-size: 18px;
+            font-weight: 600;
+            margin-top: 4px;
+        }
+
+        /* Main content layout */
+        .main-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .section-box {
+            border: 2px solid #000;
+            padding: 16px;
+            background: #ffffff;
+        }
+        
+        .section-title {
+            font-size: 20px;
+            font-weight: 800;
+            text-transform: uppercase;
+            border-bottom: 2px solid #000;
+            padding-bottom: 4px;
+            margin-bottom: 12px;
+            display: inline-block;
+        }
+
+        /* Mission / What we do */
+        .mission-grid {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 4px;
+        }
+        .mission-item {
+            flex: 1;
+        }
+        .mission-item h3 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        .mission-item p {
+            font-size: 14px;
+            color: #333;
+        }
+
+        /* Offer list */
+        .list-items {
+            list-style: none;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px 24px;
+        }
+        .list-items li {
+            position: relative;
+            padding-left: 20px;
+            font-size: 14px;
+        }
+        .list-items li::before {
+            content: "▪";
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-size: 16px;
+        }
+        .list-items li strong {
+            display: block;
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 2px;
+        }
+
+        /* Civic offer highlight box */
+        .highlight-box {
+            border: 2px dashed #000;
+            background: #f9f9f9;
+            padding: 14px;
+            text-align: center;
+            margin-top: 4px;
+        }
+        .highlight-box h3 {
+            font-size: 18px;
+            font-weight: 800;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+        .highlight-box p {
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        /* QR Codes section */
+        .qr-section {
+            border-top: 3px double #000;
+            padding-top: 20px;
+            margin-top: 20px;
+        }
+        .qr-title {
+            text-align: center;
+            font-size: 16px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 16px;
+        }
+        .qr-grid {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+            gap: 16px;
+        }
+        .qr-card {
+            flex: 1;
+            text-align: center;
+            max-width: 140px;
+        }
+        .qr-image-wrapper {
+            border: 2px solid #000;
+            padding: 4px;
+            background: #fff;
+            display: inline-block;
+            margin-bottom: 8px;
+        }
+        .qr-card img {
+            width: 110px;
+            height: 110px;
+            display: block;
+        }
+        .qr-card h4 {
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+        .qr-card p {
+            font-size: 11px;
+            color: #444;
+            line-height: 1.2;
+        }
+
+        /* Footer info */
+        .footer-note {
+            text-align: center;
+            font-size: 12px;
+            font-weight: 600;
+            margin-top: 16px;
+            border-top: 1px solid #ddd;
+            padding-top: 8px;
+        }
+
+        /* Non-printable preview info banner */
+        .no-print-banner {
+            background: #f0f0f0;
+            border: 1px solid #ccc;
+            padding: 12px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 14px;
+        }
+        .no-print-banner button {
+            background: #000;
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .no-print-banner button:hover {
+            background: #333;
+        }
+
+        @media print {
+            .no-print-banner {
+                display: none !important;
+            }
+            body {
+                padding: 0;
+            }
+            .poster-container {
+                min-height: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="no-print-banner">
+        <strong>Афіша підготовлена до друку на форматі A4 (чорно-біла).</strong><br>
+        Відкрийте цю сторінку в браузері, натисніть кнопку нижче або комбінацію клавіш <strong>Ctrl + P</strong> і виберіть принтер або збереження в PDF.<br>
+        <button onclick="window.print()">Друк / Зберегти як PDF</button>
+    </div>
+
+    <div class="poster-container">
+        <div class="header">
+            <div class="header-badge">Проект Ukrainer in Karlsruhe e.V.</div>
+            <h1>Стіна <span>3D</span> друкарня</h1>
+            <p class="tagline">Бюджетна волонтерська 3D-ферма під егідою «Ukrainer in Karlsruhe e.V.»</p>
+        </div>
+
+        <div class="main-content">
+            <div class="section-box">
+                <div class="section-title">Хто ми та що робимо?</div>
+                <div class="mission-grid">
+                    <div class="mission-item">
+                        <h3>🏥 Медичні компоненти</h3>
+                        <p>Безкоштовно друкуємо деталі для протезів, хірургічні інструменти та засоби реабілітації як гуманітарну допомогу для шпиталів в Україні в межах волонтерської мережі <strong>Друкармія</strong>.</p>
+                    </div>
+                    <div class="mission-item">
+                        <h3>🛠️ Власна 3D-ферма</h3>
+                        <p>Починали з одного принтера, а зараз звели стіну з 8 принтерів завдяки допомозі спільноти ферайну «Українці в Карлсруе».</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-box">
+                <div class="section-title">Як підтримати наш проект?</div>
+                <ul class="list-items">
+                    <li>
+                        <strong>🧵 Пластик (Filament)</strong>
+                        Маєте невикористаний пластик (PLA, PETG)? Приймаємо залишки котушок або цілі матеріали для волонтерського друку.
+                    </li>
+                    <li>
+                        <strong>🔌 Обладнання та деталі</strong>
+                        Потрібні блоки живлення (12/24V), Raspberry Pi, крокові двигуни та будь-які запчастини для 3D-принтерів.
+                    </li>
+                    <li>
+                        <strong>🏠 Місце та розетка</strong>
+                        Шукаємо додатковий простір у Карлсруе з підключенням до електрики для розширення нашої стіни принтерів.
+                    </li>
+                    <li>
+                        <strong>🤝 Волонтерство та медіа</strong>
+                        Потрібні люди для налаштування принтерів, логістики готової продукції та поширення інформації.
+                    </li>
+                </ul>
+            </div>
+
+            <div class="highlight-box">
+                <h3>Друк для допомоги та суспільних потреб</h3>
+                <p>Приймаємо пластик на друк медичної допомоги, а також на суспільні та освітні потреби. Якщо вам потрібно надрукувати власну деталь — ми допоможемо виготовити її з вашого матеріалу, а залишки пластику використаємо для медичних волонтерських виробів.</p>
+            </div>
+        </div>
+
+        <div class="qr-section">
+            <div class="qr-title">Дізнатися більше, приєднатися або зв'язатися з нами:</div>
+            <div class="qr-grid">
+                <div class="qr-card">
+                    <div class="qr-image-wrapper">
+                        <img src="assets/qr_website.png" alt="QR Website">
+                    </div>
+                    <h4>Сайт проекту</h4>
+                    <p>Детальна інформація та опис нашої роботи</p>
+                </div>
+                
+                <div class="qr-card">
+                    <div class="qr-image-wrapper">
+                        <img src="assets/qr_channel.png" alt="QR Telegram Channel">
+                    </div>
+                    <h4>Наш Telegram</h4>
+                    <p>Анонси, новини друкарні та звіти про роботу</p>
+                </div>
+
+                <div class="qr-card">
+                    <div class="qr-image-wrapper">
+                        <img src="assets/qr_organizer.png" alt="QR Telegram Contact">
+                    </div>
+                    <h4>Зв'язок</h4>
+                    <p>Напишіть організатору особисто: @robosapiens8</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-note">
+            Стіна 3D · Ein Projekt des Ukrainer in Karlsruhe e.V.<br>
+            <span style="font-size: 10px; font-weight: normal; color: #666; display: block; margin-top: 4px;">Impressum: Ukrainer in Karlsruhe e.V., Gellertstraße 14, 76185 Karlsruhe | VR 701389 (Amtsgericht Mannheim) | welcomeinkarlsruhe@gmail.com</span>
+        </div>
+    </div>
+
+</body>
+</html>
